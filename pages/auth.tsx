@@ -16,13 +16,13 @@ const auth = () => {
 
   return (
     <div className='relative h-full w-full bg-[url("/images/loginbanner.png")] bg-no-repeat bg-center bg-fixed'>
-        <div className='bg-black w-full h-full lg:bg-opacity-40'>
+        <div className='bg-[#000018] lg:bg-black w-full h-full lg:bg-opacity-40'>
             <nav className='px-12 py-5'>
                 <h1 className='text-[24px] text-white'>Jelly</h1>
             </nav>
 
             <div className='flex justify-center'>
-                <div className='bg-black bg-opacity-90 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full'>
+                <div className='lg:bg-black bg-opacity-90 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full'>
                     <h2 className='text-white text-4xl mb-8 font-semibold'>
                         {variant === 'login' ? 'Sign in' : 'Register'}
                     </h2>
@@ -58,9 +58,9 @@ const auth = () => {
                     </button>
 
                     <p className='text-neutral-500 mt-12'>
-                        First time using Jelly?
+                        {variant === 'login' ? 'First time using Jelly?' : 'Already have an account?'}
                         <span onClick={toggleVariant} className='text-white ml-1 hover:underline cursor-pointer'>
-                            Create an account
+                            {variant === 'login' ? 'Create an account' : 'Login'}
                         </span>
                     </p>
                 </div>
