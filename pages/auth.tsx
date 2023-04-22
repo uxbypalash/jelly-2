@@ -1,5 +1,7 @@
-import Input from '@/components/Input'
-import React, { useCallback, useState } from 'react'
+import axios from 'axios';
+import Input from '@/components/Input';
+import React, { useCallback, useState } from 'react';
+import { signIn } from 'next-auth/react'
 
 const auth = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +13,32 @@ const auth = () => {
 
     const toggleVariant = useCallback(() => {
         setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login');
-    }, [])
+    }, []);
+
+    const register = useCallback(async () => {
+        try {
+            await axios.post('/api/register', {
+                email,
+                name,
+                password
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }, [email, name, password]);
+
+    const login = useCallback(async () => {
+        try {
+            await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+                callbackUrl: '/'
+            });
+        }catch (error) {
+            console.log(error);
+        }
+    }, [email, password]);
 
 
   return (
@@ -22,7 +49,7 @@ const auth = () => {
             </nav>
 
             <div className='flex justify-center'>
-                <div className='lg:bg-black bg-opacity-90 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full'>
+                <div className='lg:bg-black lg:bg-opacity-80 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full'>
                     <h2 className='text-white text-4xl mb-8 font-semibold'>
                         {variant === 'login' ? 'Sign in' : 'Register'}
                     </h2>
@@ -52,7 +79,7 @@ const auth = () => {
                             value={password}
                         />
                     </div>
-                    <button className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>
+                    <button onClick={variant === 'login' ? login : register} className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>
                         {/* ---- Button Label Change on toggle */}
                         {variant === 'login' ? 'Login' : 'Sign up'}
                     </button>
