@@ -14,7 +14,8 @@ const auth = () => {
     const toggleVariant = useCallback(() => {
         setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login');
     }, []);
-
+    // -----
+    
     const register = useCallback(async () => {
         try {
             await axios.post('/api/register', {
@@ -79,7 +80,7 @@ const auth = () => {
                             value={password}
                         />
                     </div>
-                    <button onClick={variant === 'login' ? login : register} className='bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition'>
+                    <button onClick={variant === 'login' ? login : register} className='bg-indigo-700 py-3 text-white rounded-md w-full mt-10 hover:bg-indigo-800 transition'>
                         {/* ---- Button Label Change on toggle */}
                         {variant === 'login' ? 'Login' : 'Sign up'}
                     </button>
