@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios';
 import Input from '@/components/Input';
 import React from 'react';
