@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsFillPlayFill } from 'react-icons/bs';
+import { useRouter } from 'next/router';
 
 interface MovieCardProps {
     data: Record<string, any>;
@@ -8,6 +9,8 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({
     data
 }) => {
+    const router = useRouter();
+
   return (
     <div className='group bg-[#000018] col-span relative h-[12vw]'>
         <img className='cursor-pointer object-cover transition duration shadow-xl rounded-md gropu-hover:opacity-90 sm:group-hover:opacity-0 delay-300 w-full sm:h-[12vw]' src={data.thumbnailUrl} alt="Thumbnail" />
@@ -31,7 +34,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
                         transition
                         hover:bg-neutral-300
                     '
-                    onClick={() => {}}
+                    onClick={() => router.push(`/watch/${data?.id}`)}
                     >
                         <BsFillPlayFill size={35} />
                     </div>
